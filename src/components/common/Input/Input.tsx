@@ -1,18 +1,15 @@
 import './Input.css';
 
-type InputProps = {
-    type: 'number' | 'text';
-    value: number | string;
-    onChange: () => void;
-    placeholder?: string;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
-export default function Input({ type, value, onChange, placeholder }: InputProps) {
+export default function Input({ type, value, onChange, placeholder, ...props }: InputProps) {
     return (
         <input
             type={type}
             value={value}
             onChange={onChange}
-            placeholder={placeholder && placeholder} />
+            placeholder={placeholder && placeholder}
+            {...props} />
     )
 }   

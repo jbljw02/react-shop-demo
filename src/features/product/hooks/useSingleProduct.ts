@@ -16,7 +16,6 @@ export default function ({ id }: { id: number }) {
 
                 // 라우팅 된 페이지의 ID와 일치하는 상품을 반환
                 const targetProduct = products.find(item => item.id === id);
-                console.log(targetProduct)
                 setProduct(targetProduct);
             } catch (error) {
                 setIsError(true);

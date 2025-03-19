@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import { Product } from "../../types/product.type"
 import './ProductItem.css';
 import Button from "../../../../components/common/Button";
+import { useCart } from "../../../cart/context/CartContext";
 
 type ProductItemProps = {
     product: Product;
 }
 
 export default function ProductItem({ product }: ProductItemProps) {
+    const { addProductToCart } = useCart();
     return (
         <div className="product-item-container">
             <Link to={`product/${product.id}`}>
@@ -20,7 +22,12 @@ export default function ProductItem({ product }: ProductItemProps) {
                 <Button
                     label="장바구니에 추가"
                     size="small"
-                    onClick={() => console.log("A")} />
+                    color="white"
+                    backgroundColor="rgb(154, 154, 154)"
+                    onClick={() => addProductToCart({
+                        ...product,
+                        quantity: 1,
+                    })} />
             </div>
         </div>
     )
