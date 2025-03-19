@@ -1,6 +1,6 @@
 import ProductList from "../features/product/components/ProductList";
 
-export default function Home() {
+export default function HomePage() {
     return (
         <ProductList />
     )
