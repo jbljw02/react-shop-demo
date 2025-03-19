@@ -19,9 +19,3 @@ p {
     display: flex;
     flex-direction: column;
 }
-
-.cart-footer {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-}

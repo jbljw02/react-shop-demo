@@ -1,13 +1,7 @@
 button {
     border: none;
-    background-color: rgb(154, 154, 154);
-    color: white;
     border-radius: 5px;
     cursor: pointer;
-}
-
-button:hover {
-    background-color: rgb(117, 117, 117);
 }
 
 .small {
