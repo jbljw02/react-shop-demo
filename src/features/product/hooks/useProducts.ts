@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import fetchProducts from "../api/productApi";
-import { Product } from "../types/product.type";
+import { useAppDispatch } from "../../../store/hooks";
+import { setProducts } from "../../../store/features/productSlice";
 
 export default function useProducts() {
-    const [products, setProducts] = useState<Product[]>([]);
+    const dispatch = useAppDispatch();
+
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -12,9 +14,9 @@ export default function useProducts() {
         const getProducts = async () => {
             try {
                 setIsLoading(true);
-                
+
                 const data = await fetchProducts();
-                setProducts(data.products);
+                dispatch(setProducts(data.products));
             } catch (error) {
                 setIsError(true);
             } finally {
@@ -25,5 +27,5 @@ export default function useProducts() {
         getProducts();
     }, []);
 
-    return { products, isError, isLoading };
+    return { isError, isLoading };
 }

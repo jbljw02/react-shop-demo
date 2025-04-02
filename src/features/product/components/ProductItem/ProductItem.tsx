@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Product } from "../../types/product.type"
 import './ProductItem.css';
 import Button from "../../../../components/common/Button";
-import { useCart } from "../../../cart/context/CartContext";
+import useCart from "../../../cart/hooks/useCart";
 
 type ProductItemProps = {
     product: Product;

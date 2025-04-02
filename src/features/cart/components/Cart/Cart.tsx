@@ -1,9 +1,15 @@
 import CartItem from '../CartItem';
 import './Cart.css';
-import { useCart } from '../../context/CartContext';
+import { useAppSelector } from '../../../../store/hooks';
+import useCart from '../../hooks/useCart';
 
 export default function Cart() {
-    const { cart, priceSum } = useCart();
+    const cart = useAppSelector(state => state.cart);
+    const priceSum = useAppSelector(state => state.cartPriceSum);
+
+    console.log(priceSum);
+
+    useCart(); // 초기 마운트 시 장바구니 데이터를 로드
     return (
         <div className="cart-container">
             <h2 className="cart-title">장바구니</h2>

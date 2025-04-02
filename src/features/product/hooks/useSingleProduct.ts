@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Product } from "../types/product.type";
-import useProducts from "./useProducts";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { setSelectedProduct } from "../../../store/features/productSlice";
 
 export default function ({ id }: { id: number }) {
-    const { products } = useProducts();
-    
-    const [product, setProduct] = useState<Product>();
+    const dispatch = useAppDispatch();
+
+    const products = useAppSelector(state => state.product);
+
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
@@ -16,7 +17,7 @@ export default function ({ id }: { id: number }) {
 
                 // 라우팅 된 페이지의 ID와 일치하는 상품을 반환
                 const targetProduct = products.find(item => item.id === id);
-                setProduct(targetProduct);
+                dispatch(setSelectedProduct(targetProduct));
             } catch (error) {
                 setIsError(true);
             } finally {
@@ -27,5 +28,5 @@ export default function ({ id }: { id: number }) {
         findProduct();
     }, [id, products]);
 
-    return { product, isLoading, isError }
+    return { isLoading, isError }
 }
