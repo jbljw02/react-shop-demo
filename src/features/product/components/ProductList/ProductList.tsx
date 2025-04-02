@@ -4,7 +4,7 @@ import ProductItem from "../ProductItem";
 import './ProductList.css'
 
 export default function ProductList() {
-    const products = useAppSelector(state => state.product);
+    const product = useAppSelector(state => state.product);
     
     const { isLoading, isError } = useProducts();
 
@@ -14,7 +14,7 @@ export default function ProductList() {
     return (
         <div className="product-list-container">
             {
-                products.length > 0 && products.map(product => (
+                product.list.length > 0 && product.list.map(product => (
                     <ProductItem key={product.id} product={product} />
                 ))
             }

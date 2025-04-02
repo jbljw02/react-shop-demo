@@ -6,7 +6,6 @@ const combinedReducer = combineReducers({
     cart: cartReducers.cartSlice,
     cartPriceSum: cartReducers.cartPriceSum,
     product: productReducers.productSlice,
-    selectedProduct: productReducers.selectedProduct,
 });
 
 export type RootState = ReturnType<typeof combinedReducer>;

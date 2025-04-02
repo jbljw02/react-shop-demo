@@ -7,7 +7,8 @@ import { useAppSelector } from "../../../../store/hooks";
 export default function ProductDetail() {
     const { id } = useParams(); // 선택된 상품의 ID
 
-    const selectedProduct = useAppSelector(state => state.selectedProduct);
+    // 선택된 상품
+    const selectedProduct = useAppSelector(state => state.product.selectedProduct);
 
     const { isLoading, isError } = useSingleProduct({ id: Number(id) });
     const { addProductToCart } = useCart();

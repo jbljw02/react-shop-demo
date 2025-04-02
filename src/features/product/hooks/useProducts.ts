@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import fetchProducts from "../api/productApi";
 import { useAppDispatch } from "../../../store/hooks";
-import { setProducts } from "../../../store/features/productSlice";
+import { fetchProductsAsync } from "../../../store/features/productSlice";
 
 export default function useProducts() {
     const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ export default function useProducts() {
                 setIsLoading(true);
 
                 const data = await fetchProducts();
-                dispatch(setProducts(data.products));
+                dispatch(fetchProductsAsync(data.products));
             } catch (error) {
                 setIsError(true);
             } finally {
