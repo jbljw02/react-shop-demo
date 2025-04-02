@@ -1,10 +1,11 @@
 import Button from '../../../../components/common/Button';
-import { useCart } from '../../context/CartContext';
 import { Cart } from '../../types/cart.type';
 import './CartItem.css';
+import useCart from '../../hooks/useCart';
 
 export default function CartItem({ cartItem }: { cartItem: Cart }) {
     const { deleteProductFromCart, adjustProductCount } = useCart();
+
     return (
         <div className="cart-item">
             <img src={cartItem.images[0]} alt={cartItem.title} />

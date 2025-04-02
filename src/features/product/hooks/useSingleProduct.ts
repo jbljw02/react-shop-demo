@@ -1,31 +1,26 @@
-import { useEffect, useState } from "react";
-import { Product } from "../types/product.type";
-import useProducts from "./useProducts";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { setSelectedProduct, fetchProductsAsync } from "../../../store/features/productSlice";
 
-export default function ({ id }: { id: number }) {
-    const { products } = useProducts();
-    
-    const [product, setProduct] = useState<Product>();
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
+export default function useSingleProduct({ id }: { id: number }) {
+    const dispatch = useAppDispatch();
+    const { list, loading, error } = useAppSelector(state => state.product);
 
+    // 상품 목록이 없을 경우 요청
     useEffect(() => {
-        const findProduct = () => {
-            try {
-                setIsLoading(true);
-
-                // 라우팅 된 페이지의 ID와 일치하는 상품을 반환
-                const targetProduct = products.find(item => item.id === id);
-                setProduct(targetProduct);
-            } catch (error) {
-                setIsError(true);
-            } finally {
-                setIsLoading(false);
-            }
+        if (list.length === 0) {
+            dispatch(fetchProductsAsync());
         }
+    }, [dispatch, list.length]);
 
-        findProduct();
-    }, [id, products]);
+    // 상품 목록에서 선택된 상품 찾기
+    useEffect(() => {
+        const targetProduct = list.find(item => item.id === id);
+        dispatch(setSelectedProduct(targetProduct || null));
+    }, [id, list, dispatch]);
 
-    return { product, isLoading, isError }
+    return {
+        isLoading: loading,
+        isError: error
+    };
 }
